@@ -1,0 +1,16 @@
+<apex:page standardController="Product2" extensions="TranslationWorkbenchController" language="{!$CurrentPage.parameters.lang}">
+<apex:form >
+    <apex:selectList value="{!selectedLang}" size="1">
+            <apex:selectoptions value="{!listOfLang}"/>
+            <apex:actionsupport event="onchange"/>
+    </apex:selectList>
+    
+    <apex:pageBlock title="Book">
+        <apex:pageBlockSection >
+        	
+            Name: {! Product2.Name } <br/>
+            
+        </apex:pageBlockSection>
+    </apex:pageBlock>
+</apex:form>
+</apex:page>

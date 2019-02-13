@@ -1,0 +1,18 @@
+<apex:page standardController="Product2" extensions="TranslationWorkbenchController" recordSetVar="products" language="{!selectedLang}">
+<apex:form >
+    <apex:selectList value="{!selectedLang}" size="1">
+            <apex:selectoptions value="{!listOfLang}"/>
+            <apex:actionsupport event="onchange"/>
+    </apex:selectList>
+    <apex:pageblock >
+        
+        <apex:repeat var="pr" value="{!products}" rendered="true"  id="products_list">
+            <li>
+                <apex:outputLink value="apex/BookItem?id={!pr.ID}&lang={!selectedLang}">
+                    <apex:outputText value="{!pr.Name}"/>
+                </apex:outputLink>
+            </li>
+        </apex:repeat>
+    </apex:pageblock>
+</apex:form>
+</apex:page>
