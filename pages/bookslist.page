@@ -1,0 +1,11 @@
+<apex:page controller="ProductController">
+    <apex:form >
+        <apex:pageBlock title="Products List" id="products_list">
+            <apex:pageBlockTable value="{! products }" var="pr">
+                <apex:column value="{! pr.Name }"/>
+                <apex:column value="{! pr.Author__c }"/>
+                <apex:column value="{! pr.Publisher__C }"/>
+            </apex:pageBlockTable>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>
