@@ -1,18 +1,36 @@
-<apex:page standardController="Product2" extensions="TranslationWorkbenchController" recordSetVar="products" language="{!selectedLang}">
+<apex:page standardController="Product2" extensions="TranslationWorkbenchController,Product2ControllerExtension" standardstylesheets="false" recordSetVar="products" language="{!selectedLang}">
 <apex:form >
+    <style>
+        .wrapper {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        grid-auto-rows: 260px; 
+        text-align: center
+        }
+    </style>
     <apex:selectList value="{!selectedLang}" size="1">
             <apex:selectoptions value="{!listOfLang}"/>
             <apex:actionsupport event="onchange"/>
     </apex:selectList>
+    <apex:selectList value="{!selectedCurrency}" size="1">
+            <apex:selectoptions value="{!ListOfCurr}"/>
+            <apex:actionSupport event="onchange" action="{!product2CurrencyState}"/>
+    </apex:selectList>
     <apex:pageblock >
-        
-        <apex:repeat var="pr" value="{!products}" rendered="true"  id="products_list">
-            <li>
-                <apex:outputLink value="apex/BookItem?id={!pr.ID}&lang={!selectedLang}">
-                    <apex:outputText value="{!pr.Name}"/>
+    
+        <div class="wrapper">
+        <apex:repeat var="pr" value="{!ProductsWithPrices}" rendered="true"  id="products_list">          
+                <div>
+                <apex:outputLink value="apex/BookItem?id={!pr.Product2.ID}&lang={!selectedLang}">
+                    <apex:variable var="imageVar" value="{!pr.Product2.ImageName__c}"/>
+                    <apex:image url="{!$Resource[imageVar]}" width="150" height="210"/> <br />
                 </apex:outputLink>
-            </li>
-        </apex:repeat>
+                    {!pr.UnitPrice} {!selectedCurrency} <br />
+                    {!pr.Product2.Name}  <br />
+                    {!pr.Product2.Author__c}  <br />
+                </div>
+        </apex:repeat> 
+        </div>
     </apex:pageblock>
 </apex:form>
 </apex:page>
