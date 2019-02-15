@@ -19,9 +19,9 @@
     <apex:pageblock >
     
         <div class="wrapper">
-        <apex:repeat var="pr" value="{!ProductsWithPrices}" rendered="true"  id="products_list">          
+        <apex:repeat var="pr" value="{!ProductsWithPrices}" rendered="true" id="products_list">          
                 <div>
-                <apex:outputLink value="apex/BookItem?id={!pr.Product2.ID}&lang={!selectedLang}">
+                <apex:outputLink value="apex/BookItem?id={!pr.Product2.ID}&lang={!selectedLang}&curr={!selectedCurrency}">
                     <apex:variable var="imageVar" value="{!pr.Product2.ImageName__c}"/>
                     <apex:image url="{!$Resource[imageVar]}" width="150" height="210"/> <br />
                 </apex:outputLink>

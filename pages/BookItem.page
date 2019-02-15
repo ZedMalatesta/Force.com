@@ -1,15 +1,38 @@
-<apex:page standardController="Product2" extensions="TranslationWorkbenchController" language="{!$CurrentPage.parameters.lang}">
+<apex:page standardController="Product2" extensions="TranslationWorkbenchController,Product2ControllerItemExtension" language="{!$CurrentPage.parameters.lang}">
 <apex:form >
+    <style>
+        .img {
+        float: left;
+        }
+        .txt{
+        margin-left: 20px;
+        font-size: 250%;
+        }
+    </style>
     <apex:selectList value="{!selectedLang}" size="1">
             <apex:selectoptions value="{!listOfLang}"/>
             <apex:actionsupport event="onchange"/>
     </apex:selectList>
-    
+    <apex:selectList value="{!selectedCurrency}" size="1">
+            <apex:selectoptions value="{!ListOfCurr}"/>
+            <apex:actionSupport event="onchange" action="{!product2CurrencyState}"/>
+    </apex:selectList><br/>
+    <apex:variable var="imageVar" value="{!Product2.ImageName__c}"/>
     <apex:pageBlock title="Book">
+    <div class="img">
+    <apex:image url="{!$Resource[imageVar]}" width="450" height="630"/>
+    </div>
+    <div class="img">
+    </div>
+    <div class="txt">
+        Name: {! Product2.Name } <br/>
+        Author: {! Product2.Author__c } <br/>
+        Publisher: {! Product2.Publisher__c } <br/>
+        Number of pages: {! Product2.PageNumber__c } <br/>
+        Price: {! ProductWithPrice.UnitPrice } {!selectedCurrency} <br/>
+    </div>
         <apex:pageBlockSection >
-        	
-            Name: {! Product2.Name } <br/>
-            
+
         </apex:pageBlockSection>
     </apex:pageBlock>
 </apex:form>
