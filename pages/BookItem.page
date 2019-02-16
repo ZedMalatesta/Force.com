@@ -1,4 +1,4 @@
-<apex:page standardController="Product2" extensions="TranslationWorkbenchController,Product2ControllerItemExtension" language="{!$CurrentPage.parameters.lang}">
+<apex:page docType="html-5.0" standardController="Product2" extensions="TranslationWorkbenchController,Product2ControllerItemExtension" language="{!$CurrentPage.parameters.lang}">
 <apex:form >
     <style>
         .img {
@@ -7,6 +7,15 @@
         .txt{
         margin-left: 20px;
         font-size: 250%;
+        }
+        .txt2{
+        opacity : 0.8;
+        margin-left: 400px;
+        font-size: 150%;
+        font: bold italic;
+        }
+        .errtxt {
+        color: red;
         }
     </style>
     <apex:selectList value="{!selectedLang}" size="1">
@@ -18,7 +27,7 @@
             <apex:actionSupport event="onchange" action="{!product2CurrencyState}"/>
     </apex:selectList><br/>
     <apex:variable var="imageVar" value="{!Product2.ImageName__c}"/>
-    <apex:pageBlock title="Book">
+    <apex:pageBlock title="{!Product2.Name}">
     <div class="img">
     <apex:image url="{!$Resource[imageVar]}" width="450" height="630"/>
     </div>
@@ -31,9 +40,21 @@
         Number of pages: {! Product2.PageNumber__c } <br/>
         Price: {! ProductWithPrice.UnitPrice } {!selectedCurrency} <br/>
     </div>
-        <apex:pageBlockSection >
-
-        </apex:pageBlockSection>
+    <div class="txt2">
+              {! Product2.Description } <br/>
+    </div>
+    </apex:pageBlock>
+    <apex:pageBlock title="Leave a request">
+        Your First Name: <apex:input value="{!leadFisrtName}"/> <br/>
+        Your Last Name:  <apex:input value="{!leadLastName}"/> <br/>
+        Your Phone:         <apex:input value="{!leadPhone}"/> <br/>
+        Your Email:          <apex:input value="{!leadEmail}"/> <br/>
+        <div class="errtxt">
+            {! errorMess }
+        </div>  
+        <apex:pageBlockButtons >
+            <apex:commandButton action="{!product2RequestCreate}" value="Send"/>
+        </apex:pageBlockButtons>
     </apex:pageBlock>
 </apex:form>
 </apex:page>

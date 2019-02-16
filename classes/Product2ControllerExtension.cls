@@ -49,5 +49,5 @@ public class Product2ControllerExtension {
             }    
             previousCurrMult=1;
         }
-    }
+    }   
 }

@@ -1,0 +1,25 @@
+<apex:page docType="html-5.0" standardController="Case" extensions="TranslationWorkbenchController" language="{!selectedLang}">
+    <apex:form >
+        <apex:panelGrid columns="2" id="theGrid">
+            <apex:panelGroup id="theGroup">
+                <apex:outputLink value="apex/BookStoreMap">
+                    <apex:image url="{!$Resource.Stores}" width="414" height="268"/> <br />
+                </apex:outputLink>
+                Our stores
+            </apex:panelGroup>
+            <apex:panelGroup id="theGroup2">
+                <apex:outputLink value="apex/BookListAura">
+                    <apex:image url="{!$Resource.Books}" width="339" height="340"/> <br />
+                </apex:outputLink>
+                Our books
+            </apex:panelGroup> 
+        </apex:panelGrid>
+        <apex:pageBlock title="Ask a question">
+        Your Name: <apex:inputField value="{!Case.Subject}"/> <br/>
+        Write an ask:  <apex:inputField value="{!Case.Description}"/> <br/> 
+        <apex:pageBlockButtons >
+            <apex:commandButton action="{!save}" value="Save"/>
+        </apex:pageBlockButtons>
+    </apex:pageBlock>
+</apex:form>
+</apex:page>
