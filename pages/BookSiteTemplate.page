@@ -1,0 +1,6 @@
+<apex:page showHeader="false" id="BookSiteTemplate">
+  <apex:insert name="header">
+    <c:BookSiteHeader />
+    <hr/>
+  </apex:insert>
+</apex:page>

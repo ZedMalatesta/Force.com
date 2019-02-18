@@ -68,7 +68,7 @@ public class Product2ControllerItemExtension {
                List<Lead> lds2 = [SELECT Id FROM Lead where Email = :newLead.Email or Phone = :newLead.Phone];
                LeadID=lds2[0].Id;
             }
-            ProductRequest__c pr = new ProductRequest__c(Lead__c=LeadID, Product__c=ApexPages.currentPage().getParameters().get('Id'));
+            ProductRequest__c pr = new ProductRequest__c(Lead__c=LeadID, Product__c=ApexPages.currentPage().getParameters().get('Id'), State__c=true);
             insert pr;
             errorMess = '';        
         }

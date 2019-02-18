@@ -1,4 +1,4 @@
-<apex:page docType="html-5.0" standardController="Product2" extensions="TranslationWorkbenchController,Product2ControllerItemExtension" language="{!$CurrentPage.parameters.lang}">
+<apex:page docType="html-5.0" standardController="Product2" extensions="TranslationWorkbenchController,Product2ControllerItemExtension" language="{!selectedLang}">
 <apex:form >
     <style>
         .img {
@@ -34,8 +34,8 @@
     <div class="img">
     </div>
     <div class="txt">
-        Name: {! Product2.Name } <br/>
-        Author: {! Product2.Author__c } <br/>
+        {!$Label.name}: {! Product2.Name } <br/>
+        {!$Label.author}: {! Product2.Author__c } <br/>
         Publisher: {! Product2.Publisher__c } <br/>
         Number of pages: {! Product2.PageNumber__c } <br/>
         Price: {! ProductWithPrice.UnitPrice } {!selectedCurrency} <br/>
@@ -52,9 +52,12 @@
         <div class="errtxt">
             {! errorMess }
         </div>  
-        <apex:pageBlockButtons >
+        <apex:pageBlockButtons location="top">
             <apex:commandButton action="{!product2RequestCreate}" value="Send"/>
         </apex:pageBlockButtons>
-    </apex:pageBlock>
+        <apex:pageBlockButtons location="bottom">
+            <apex:commandButton action="{!back}" value="Back"/>
+        </apex:pageBlockButtons>
+    </apex:pageBlock>   
 </apex:form>
 </apex:page>

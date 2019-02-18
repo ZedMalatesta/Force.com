@@ -52,49 +52,27 @@
     <enableSharing>true</enableSharing>
     <enableStreamingApi>true</enableStreamingApi>
     <fields>
-        <fullName>Lead__c</fullName>
-        <deleteConstraint>SetNull</deleteConstraint>
+        <fullName>Rate__c</fullName>
         <externalId>false</externalId>
-        <label>Lead</label>
-        <referenceTo>Lead</referenceTo>
-        <relationshipLabel>ProductRequests</relationshipLabel>
-        <relationshipName>ProductRequests</relationshipName>
+        <label>Rate</label>
+        <precision>18</precision>
         <required>false</required>
+        <scale>14</scale>
         <trackTrending>false</trackTrending>
-        <type>Lookup</type>
+        <type>Number</type>
+        <unique>false</unique>
     </fields>
-    <fields>
-        <fullName>Product__c</fullName>
-        <deleteConstraint>SetNull</deleteConstraint>
-        <externalId>false</externalId>
-        <label>Product</label>
-        <referenceTo>Product2</referenceTo>
-        <relationshipLabel>ProductRequests</relationshipLabel>
-        <relationshipName>ProductRequests</relationshipName>
-        <required>false</required>
-        <trackTrending>false</trackTrending>
-        <type>Lookup</type>
-    </fields>
-    <fields>
-        <fullName>State__c</fullName>
-        <defaultValue>true</defaultValue>
-        <description>Relevance of request</description>
-        <externalId>false</externalId>
-        <label>State</label>
-        <trackTrending>false</trackTrending>
-        <type>Checkbox</type>
-    </fields>
-    <label>ProductRequest</label>
+    <label>CurrencyRate</label>
     <listViews>
         <fullName>All</fullName>
         <filterScope>Everything</filterScope>
         <label>All</label>
     </listViews>
     <nameField>
-        <label>ProductRequest Name</label>
+        <label>CurrencyRate Name</label>
         <type>Text</type>
     </nameField>
-    <pluralLabel>ProductRequests</pluralLabel>
+    <pluralLabel>CurrencyRates</pluralLabel>
     <searchLayouts/>
     <sharingModel>ReadWrite</sharingModel>
     <visibility>Public</visibility>

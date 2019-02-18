@@ -1,5 +1,4 @@
-public class NationalBankCallout {
-   
+public class NationalBankCallout {   
     public static Decimal currencyBankCallout (String name){
         HttpRequest req = new HttpRequest();
         req.setEndpoint('http://www.nbrb.by/API/ExRates/Rates/'+name+'?ParamMode=2');

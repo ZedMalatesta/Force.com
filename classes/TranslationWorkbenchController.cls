@@ -8,14 +8,6 @@ public without sharing class TranslationWorkbenchController {
     
     public ApexPages.StandardSetController stdSetCntrlr {get; set;}
     
-    public TranslationWorkbenchController() {  
-        selectedLang='en';
-        listOfLang = new List<selectOption>();
-        listOfLang.add(new selectOption('en','English'));
-        listOfLang.add(new selectOption('ru','Russian'));
-        listOfLang.add(new selectOption('de','German'));
-    }
-    
     public TranslationWorkbenchController(ApexPages.StandardController controller) {
         stdCntrlr = controller;
         

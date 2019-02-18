@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomLabels xmlns="http://soap.sforce.com/2006/04/metadata">
+    <labels>
+        <fullName>author</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>author</shortDescription>
+        <value>Author</value>
+    </labels>
+    <labels>
+        <fullName>name</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>name</shortDescription>
+        <value>Title</value>
+    </labels>
+</CustomLabels>

@@ -3,6 +3,7 @@ public class Product2ControllerExtension {
     private final Product2 prod;
     
     public string selectedCurrency{get; set;}
+    public string searchString {get; set;}
     private decimal previousCurrMult{get; set;}
     
     public List<SelectOption> ListOfCurr{get;set;}
@@ -14,11 +15,13 @@ public class Product2ControllerExtension {
         this.prod = (Product2)stdController.getRecord();
         
         selectedCurrency='USD';
-        previousCurrMult=NationalBankCallout.currencyBankCallout(selectedCurrency).setScale(2);
+        List<CurrencyRate__c> curRate = [SELECT Rate__c FROM CurrencyRate__c where Name=:selectedCurrency];
+        previousCurrMult=curRate[0].Rate__c.setScale(2);
         ListOfCurr = new List<selectOption>();
-        ListOfCurr.add(new selectOption('USD','USD'));
         ListOfCurr.add(new selectOption('BYN','BYN'));
-        ListOfCurr.add(new selectOption('EUR','EUR'));
+        for (CurrencyRate__c cur : [SELECT Name FROM CurrencyRate__c]){
+            ListOfCurr.add(new selectOption(cur.Name,cur.Name));
+        }      
     }
     
     public Product2ControllerExtension(ApexPages.StandardSetController stdController) {
@@ -26,16 +29,19 @@ public class Product2ControllerExtension {
         this.prod = (Product2)stdController.getRecord();
         
         selectedCurrency='USD';
-        previousCurrMult=NationalBankCallout.currencyBankCallout(selectedCurrency).setScale(2);
+        List<CurrencyRate__c> curRate = [SELECT Rate__c FROM CurrencyRate__c where Name=:selectedCurrency];
+        previousCurrMult=curRate[0].Rate__c.setScale(2);
         ListOfCurr = new List<selectOption>();
-        ListOfCurr.add(new selectOption('USD','USD'));
         ListOfCurr.add(new selectOption('BYN','BYN'));
-        ListOfCurr.add(new selectOption('EUR','EUR'));
+        for (CurrencyRate__c cur : [SELECT Name FROM CurrencyRate__c]){
+            ListOfCurr.add(new selectOption(cur.Name,cur.Name));
+        }        
     }
     
     public void product2CurrencyState(){         
         if (selectedCurrency!='BYN'){
-            decimal multiplier = NationalBankCallout.currencyBankCallout(selectedCurrency).setScale(2);
+            List<CurrencyRate__c> curRate = [SELECT Rate__c FROM CurrencyRate__c where Name=:selectedCurrency];
+            decimal multiplier = curRate[0].Rate__c.setScale(2);           
             for (PriceBookEntry pbe : ProductsWithPrices){
                 System.debug(pbe.UnitPrice);
                 pbe.UnitPrice = (pbe.UnitPrice*previousCurrMult/multiplier).setScale(2);
@@ -50,4 +56,13 @@ public class Product2ControllerExtension {
             previousCurrMult=1;
         }
     }   
+    
+    public void doSearch() {
+        ProductsWithPrices = [SELECT Product2.Id, Product2.Name, Product2.Author__c, Product2.ImageName__C, UnitPrice 
+                              FROM PriceBookEntry 
+                              WHERE Pricebook2.IsStandard = true 
+                              AND (Product2.Name 
+                                   LIKE :('%' + searchString + '%') 
+                                   OR Product2.Author__c LIKE :('%' + searchString + '%'))]; 
+    }
 }
