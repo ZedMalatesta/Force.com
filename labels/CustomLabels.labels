@@ -14,4 +14,25 @@
         <shortDescription>name</shortDescription>
         <value>Title</value>
     </labels>
+    <labels>
+        <fullName>pagenumber</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>pagenumber</shortDescription>
+        <value>Number of pages</value>
+    </labels>
+    <labels>
+        <fullName>publisher</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>publisher</shortDescription>
+        <value>Publisher</value>
+    </labels>
+    <labels>
+        <fullName>search</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>search</shortDescription>
+        <value>Search</value>
+    </labels>
 </CustomLabels>

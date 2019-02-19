@@ -1,9 +1,15 @@
 @istest(SeeAllData=true)
-public class ExchangeRateUpdateTest {
+public class ExchangeRateUpdateTest implements Database.AllowsCallouts {
     static testmethod void test() {
         Test.startTest();
-        String CRON_EXP = '0 0 0 10 JAN 1 2019';
+        String CRON_EXP = '0 0 0 1 1 ? 2025';
         String jobId = System.schedule('Sample_Heading', CRON_EXP, new ExchangeRateUpdate());   
+        
+        CronTrigger ct = [select id, CronExpression, TimesTriggered, NextFireTime from CronTrigger where id = :jobId];
+
+        System.assertEquals(CRON_EXP, ct.CronExpression); 
+        System.assertEquals(0, ct.TimesTriggered);
+        System.assertEquals('2025-01-01 00:00:00', String.valueOf(ct.NextFireTime));
         Test.stopTest();
     }
 }

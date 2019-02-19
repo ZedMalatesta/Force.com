@@ -62,6 +62,16 @@
         <type>Number</type>
         <unique>false</unique>
     </fields>
+    <fields>
+        <fullName>Symbol__c</fullName>
+        <externalId>false</externalId>
+        <label>Symbol</label>
+        <length>3</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
     <label>CurrencyRate</label>
     <listViews>
         <fullName>All</fullName>

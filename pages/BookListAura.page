@@ -1,4 +1,4 @@
-<apex:page standardController="Product2" showHeader="false" extensions="TranslationWorkbenchController,Product2ControllerExtension" standardstylesheets="true" recordSetVar="products" language="{!selectedLang}">
+<apex:page standardController="Product2" extensions="TranslationWorkbenchController,Product2ControllerExtension" showHeader="false" standardstylesheets="true" recordSetVar="products" language="{!selectedLang}">
     <apex:composition template="{!$Site.Template}">
     </apex:composition>
         <apex:form >
@@ -10,28 +10,27 @@
                 text-align: center
                 }
             </style>
-    
-            <apex:selectList value="{!selectedLang}" size="1">
-                <apex:selectoptions value="{!listOfLang}"/>
-                <apex:actionsupport event="onchange"/>
-            </apex:selectList>
-    <apex:selectList value="{!selectedCurrency}" size="1">
-            <apex:selectoptions value="{!ListOfCurr}"/>
-            <apex:actionSupport event="onchange" action="{!product2CurrencyState}"/>
-    </apex:selectList>
     <apex:pageBlock title="Search" >
       <apex:inputText value="{!searchString}" id="theSearchString" maxlength="100" size="110" /> &nbsp;
       <apex:CommandButton Id="btnSearch" action="{!doSearch}" rerender="BooksList" value="Search" />
+        <apex:selectList value="{!selectedLang}" size="1">
+            <apex:selectoptions value="{!listOfLang}"/>
+        <apex:actionsupport event="onchange"/>
+        </apex:selectList>
+        <apex:selectList value="{!selectedCurrency}" size="1">
+            <apex:selectoptions value="{!ListOfCurr}"/>
+            <apex:actionSupport event="onchange" action="{!product2CurrencyState}"/>
+        </apex:selectList>
     </apex:pageBlock>
     <apex:pageblock id="BooksList">
         <div class="wrapper">
         <apex:repeat var="pr" value="{!ProductsWithPrices}" rendered="true" id="products_list">          
                 <div>
-                <apex:outputLink value="apex/BookItem?id={!pr.Product2.ID}&lang={!selectedLang}&curr={!selectedCurrency}">
+                <apex:outputLink value="/BookItem?id={!pr.Product2.ID}&lang={!selectedLang}&curr={!selectedCurrency}">
                     <apex:variable var="imageVar" value="{!pr.Product2.ImageName__c}"/>
                     <apex:image url="{!$Resource[imageVar]}" width="150" height="210"/> <br />
                 </apex:outputLink>
-                    {!pr.UnitPrice} {!selectedCurrency} <br />
+                    {!pr.UnitPrice} {!selectedCurrencyView} <br />
                     {!pr.Product2.Name}  <br />
                     {!pr.Product2.Author__c}  <br />
                 </div>

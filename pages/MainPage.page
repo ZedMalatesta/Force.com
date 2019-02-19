@@ -1,14 +1,16 @@
-<apex:page docType="html-5.0" standardController="Case" extensions="TranslationWorkbenchController" language="{!selectedLang}">
+<apex:page docType="html-5.0" standardController="Case" extensions="TranslationWorkbenchController" showHeader="false" standardstylesheets="true" language="{!selectedLang}">
+    <apex:composition template="{!$Site.Template}">
+    </apex:composition>
     <apex:form >
         <apex:panelGrid columns="2" id="theGrid">
             <apex:panelGroup id="theGroup">
-                <apex:outputLink value="apex/BookStoreMap">
+                <apex:outputLink value="/BookStoreMap">
                     <apex:image url="{!$Resource.Stores}" width="414" height="268"/> <br />
                 </apex:outputLink>
                 Our stores
             </apex:panelGroup>
             <apex:panelGroup id="theGroup2">
-                <apex:outputLink value="apex/BookListAura">
+                <apex:outputLink value="/BookListAura">
                     <apex:image url="{!$Resource.Books}" width="339" height="340"/> <br />
                 </apex:outputLink>
                 Our books

@@ -1,4 +1,4 @@
-public class Product2ControllerItemExtension {
+public class Product2ControllerItemExtension implements Product2ControllerInterface  {
     
     private final Product2 prod;
 
@@ -10,6 +10,7 @@ public class Product2ControllerItemExtension {
     public string errorMess {get; set;}
     
     public string selectedCurrency{get; set;}
+    public string selectedCurrencyView{get; set;}
     
     private decimal previousCurrMult{get; set;} 
     
@@ -46,7 +47,7 @@ public class Product2ControllerItemExtension {
     }
     
     public PageReference back(){
-        PageReference Page = new PageReference('/apex/BookListAura');
+        PageReference Page = new PageReference('/BookListAura');
         Page.setRedirect(true);
         return Page;
     }
@@ -55,7 +56,7 @@ public class Product2ControllerItemExtension {
         try{
             Lead newLead = new Lead(FirstName = leadFisrtName, LastName = leadLastName, Phone = leadPhone, Email=leadEmail, Company='Independ');
             String LeadID=null;
-            List<Lead> lds = [SELECT Id, Email, Phone FROM Lead where Email = :newLead.Email or Phone = :newLead.Phone];
+            List<Lead> lds = [SELECT Id, Email, Phone FROM Lead where Email = :newLead.Email or Phone = :newLead.Phone];    
             if (!lds.isEmpty()){
                 Lead leadToUpdate = lds[0];
                 leadToUpdate.Email=newLead.Email;
@@ -73,7 +74,8 @@ public class Product2ControllerItemExtension {
             errorMess = '';        
         }
         catch(Exception e){
-            errorMess = 'Incorrect Phone or Email!';
+            System.debug(e.getCause());
+            errorMess = e.getMessage();
         }
     }
 }

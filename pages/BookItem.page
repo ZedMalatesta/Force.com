@@ -1,4 +1,6 @@
-<apex:page docType="html-5.0" standardController="Product2" extensions="TranslationWorkbenchController,Product2ControllerItemExtension" language="{!selectedLang}">
+<apex:page docType="html-5.0" standardController="Product2" extensions="TranslationWorkbenchController,Product2ControllerItemExtension" showHeader="false" standardstylesheets="true"  language="{!selectedLang}">
+<apex:composition template="{!$Site.Template}">
+</apex:composition>
 <apex:form >
     <style>
         .img {

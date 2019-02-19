@@ -1,0 +1,13 @@
+<apex:page controller="BookStoreItemController" extensions="TranslationWorkbenchController" showHeader="false" standardstylesheets="true"  language="{!selectedLang}">
+  <apex:form >
+    <apex:pageBlock title="{!BookStore.Name}">
+        
+        {! BookStore.Name } <br/>
+        {! BookStore.ContactPhone__c } <br/>
+        <apex:pageBlockButtons location="bottom">
+            <apex:commandButton action="{!back}" value="Back">
+            </apex:commandButton>
+        </apex:pageBlockButtons>   
+    </apex:pageBlock> 
+  </apex:form>
+</apex:page>

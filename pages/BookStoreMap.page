@@ -45,7 +45,7 @@ function addMarker(id, name, lat, lng) {
             title: name
     });
     google.maps.event.addListener(marker, 'click', function(event) {
-        window.top.location = '/' + id;
+        window.top.location.href = '/bookstore/BookStoreItem?id=' + id;
     });
 }
 

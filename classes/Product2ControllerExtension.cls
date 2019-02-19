@@ -1,8 +1,10 @@
-public class Product2ControllerExtension {
+public class Product2ControllerExtension implements Product2ControllerInterface {
     
     private final Product2 prod;
     
     public string selectedCurrency{get; set;}
+    public string selectedCurrencyView{get; set;}
+    
     public string searchString {get; set;}
     private decimal previousCurrMult{get; set;}
     
@@ -15,7 +17,13 @@ public class Product2ControllerExtension {
         this.prod = (Product2)stdController.getRecord();
         
         selectedCurrency='USD';
-        List<CurrencyRate__c> curRate = [SELECT Rate__c FROM CurrencyRate__c where Name=:selectedCurrency];
+        List<CurrencyRate__c> curRate = [SELECT Rate__c, Symbol__c FROM CurrencyRate__c where Name=:selectedCurrency];
+        if (!String.isBlank(curRate[0].Symbol__c)){
+            selectedCurrencyView=curRate[0].Symbol__c;
+        }
+        else{
+            selectedCurrencyView=selectedCurrency;
+        }
         previousCurrMult=curRate[0].Rate__c.setScale(2);
         ListOfCurr = new List<selectOption>();
         ListOfCurr.add(new selectOption('BYN','BYN'));
@@ -29,7 +37,14 @@ public class Product2ControllerExtension {
         this.prod = (Product2)stdController.getRecord();
         
         selectedCurrency='USD';
-        List<CurrencyRate__c> curRate = [SELECT Rate__c FROM CurrencyRate__c where Name=:selectedCurrency];
+        
+        List<CurrencyRate__c> curRate = [SELECT Rate__c, Symbol__c FROM CurrencyRate__c where Name=:selectedCurrency];
+        if (!String.isBlank(curRate[0].Symbol__c)){
+            selectedCurrencyView=curRate[0].Symbol__c;
+        }
+        else{
+            selectedCurrencyView=selectedCurrency;
+        }
         previousCurrMult=curRate[0].Rate__c.setScale(2);
         ListOfCurr = new List<selectOption>();
         ListOfCurr.add(new selectOption('BYN','BYN'));
@@ -40,12 +55,18 @@ public class Product2ControllerExtension {
     
     public void product2CurrencyState(){         
         if (selectedCurrency!='BYN'){
-            List<CurrencyRate__c> curRate = [SELECT Rate__c FROM CurrencyRate__c where Name=:selectedCurrency];
-            decimal multiplier = curRate[0].Rate__c.setScale(2);           
+            List<CurrencyRate__c> curRate = [SELECT Rate__c, Symbol__c FROM CurrencyRate__c where Name=:selectedCurrency]; 
+            decimal multiplier = curRate[0].Rate__c.setScale(2);  
             for (PriceBookEntry pbe : ProductsWithPrices){
                 System.debug(pbe.UnitPrice);
                 pbe.UnitPrice = (pbe.UnitPrice*previousCurrMult/multiplier).setScale(2);
             }     
+            if (!String.isBlank(curRate[0].Symbol__c)){
+                selectedCurrencyView=curRate[0].Symbol__c;
+            }
+            else{
+                selectedCurrencyView=selectedCurrency;
+            }
             previousCurrMult=multiplier;
         }
         else{
@@ -54,6 +75,7 @@ public class Product2ControllerExtension {
                 pbe.UnitPrice = (pbe.UnitPrice*previousCurrMult).setScale(2);    
             }    
             previousCurrMult=1;
+            selectedCurrencyView=selectedCurrency;
         }
     }   
     
